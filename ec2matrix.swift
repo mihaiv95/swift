@@ -1,0 +1,111 @@
+import Foundation
+
+
+ func citire()->[Float]{
+    print("a=")
+    let s = readLine()
+    if let sa = s{
+        let x = Float(sa)
+        if let _a = x{
+            print("b=")
+            let s = readLine()
+            if let sa = s{
+                let x = Float(sa)
+                if let _b = x{
+                    print("c=")
+                    let s = readLine()
+                    if let sa = s{
+                        let x = Float(sa)
+                        if let _c = x{
+                            return [_a, _b, _c]
+                        }
+                        else{
+                            return [1,2,1]
+                        }
+                    }
+                    else{
+                        return [1,2,1]
+                    }
+                }
+                else{
+                    return [1,2,1]
+                }
+            }
+            else{
+                return [1,2,1]
+            }
+            
+        }
+        else{
+            return [1,2,1]
+        }
+    }
+    else{
+        return [1,2,1]
+    }
+}
+
+ func rezolva(coef: [Float]) -> [[Float]] {
+    let delta = coef[1] * coef[1] - 4 * coef[0] * coef[2]
+    if delta >= 0{
+        // x1.append((-coef[1] - sqrt(delta)) / (2 * coef[0]))
+        // x2.append((-coef[1] + sqrt(delta)) / (2 * coef[0]))
+        // x1.append(Float(0.0))
+        // x2.append(Float(0.0))
+        
+        
+        return [
+                    [(-coef[1] - sqrt(delta)) / (2 * coef[0]), 
+                    (-coef[1] + sqrt(delta)) / (2 * coef[0])
+                    ], 
+                [ Float(0.0),
+                Float(0.0)
+                
+                ]
+                ]
+    }else{
+        // x1.append((-coef[1]) / (2*coef[0]))
+        // x2.append((-coef[1]) / (2*coef[0]))
+        // x1.append(-sqrt(-delta) / (2 * coef[0]))
+        // x2.append(sqrt(-delta) / (2 * coef[0]))
+        
+        [
+            [(-coef[1]) / (2*coef[0]),
+            (-coef[1]) / (2*coef[0])
+            ],
+            [-sqrt(-delta) / (2 * coef[0]),
+            sqrt(-delta) / (2 * coef[0])
+            ]
+            ]
+    }
+}
+
+ func tipareste(x: [[Float]]){
+    print("x1 = \(x[0][0]) + \(x[0][1])")
+    print("x2 = \(x[1][0]) + \(x[1][1])")
+}
+
+func tipareste_coeficienti(coef: [Float]){
+    // for x in coef{
+    //     print(x)
+    // }
+    var i = 0
+    // while (i < coef.count){
+    //     print(coef[i])
+    //     i = i + 1
+    // }
+    repeat{
+        print(coef[i])
+        i = i + 1
+    }while (i < coef.count)
+    
+}
+
+var x1 = [Float]()
+var x2 = [Float]()
+
+ let coef = citire()
+ 
+ tipareste_coeficienti(coef: coef)
+ var x = rezolva(coef: coef)
+tipareste(x:x)
