@@ -1,0 +1,128 @@
+import Foundation
+
+class t_set_of_primes{
+    var primes: Set<Int>
+    
+    init(){
+        primes = []
+    }
+    
+    init(_ x: Int){
+        primes = [x]
+    }
+    
+    init(_ x:Int,_ y: Int){
+        primes = []
+        for i in stride(from: x, through: y, by: 1){
+            add(i)
+        }
+    }
+    
+    deinit{
+        primes = []
+    }
+    
+    func add(_ x:Int){
+        if is_prime(x){
+            primes.insert(x)
+        }
+    }
+    
+    func is_prime(_ x:Int)-> Bool{
+        // var d = 2
+        // if (x == 1){
+        //     return false
+        // }
+        // while (Double(d) <= sqrt(Double(x))){
+        //     if (x % d == 0){
+        //         return false
+        //     }
+        //     d = d + 1
+        // }
+        // return true
+        if (x == 1){
+            return false
+        }
+        
+
+        
+        for d in stride(from: 2, through: Int(sqrt(Double(x))), by: 1){
+            if (x % d == 0){
+                return false
+            }
+        }
+        return true
+    }
+    
+    func reuneste(_ a: t_set_of_primes){
+        primes = primes.union(a.primes)
+    }
+    
+    func reuneste_ret(_ a: t_set_of_primes) -> t_set_of_primes{
+        let tmp = t_set_of_primes()
+        tmp.primes = primes.union(a.primes)
+        return tmp
+    }
+    
+    func print_set(){
+    
+        
+        var s = "The set is: {"
+        for x in primes.sorted(){
+            s = s + String(x) + " "
+        }
+        s = s + "}"
+        print(s)
+
+    }
+}
+
+let s_opt = readLine()
+
+if let s = s_opt{
+
+    switch s{
+        case "1": //test add
+            let m = t_set_of_primes()
+            m.add(2)
+            m.add(3)
+            m.add(4)
+            m.add(7)
+            m.print_set()
+            // fallthrough
+            
+        case "2": //test add
+            let m = t_set_of_primes(7)
+            m.add(2)
+            m.add(3)
+            m.add(4)
+            m.print_set()
+            
+        case "3": //test array
+            let m = t_set_of_primes(1,41)
+            m.print_set()
+            
+        case "4": //test reuneste
+            let m = t_set_of_primes(7,41)
+            let p = t_set_of_primes(90,100)
+            m.reuneste(p)
+            m.print_set()
+            
+        case "5": //test reuneste_ret
+            let m = t_set_of_primes(7,41)
+            let p = t_set_of_primes(90,100)
+            var y = t_set_of_primes(100,200)
+            m.reuneste(p)
+            y = m.reuneste_ret(m)
+            y.print_set()
+            
+            
+            
+        default: 
+            print("Invalid input")
+    }
+
+}else{
+    print("no input")
+}
+
